@@ -85,6 +85,14 @@ window.data = {
       unlocked: false,
       cps: 2000,
       qty: 0
+    },
+    {
+      id: 'coffee_solarsystem',
+      price: 100000000,
+      unlocked:false,
+      cps: 4000,
+      qty :0
     }
+
   ]
 };

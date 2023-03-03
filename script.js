@@ -36,7 +36,7 @@ function unlockProducers(producers, coffeeCount) {
   // to half the producer's price, reassign the producers.unlocked property to equal true
 for (i = 0; i<producers.length; i++){
   let producer = producers [i];
-  if (producer.price >=(coffeeCount =2)){
+  if (coffeeCount>=producer.price/2){
     producer.unlocked = true;
   }
   }
@@ -48,8 +48,8 @@ function getUnlockedProducers(data) {
   // use the Array.prototype.filter() method
   // filter through the data.producers property, and return an array with only the producers whose
   // unlocked property is true
-data[producers].filter(producers =>producers.unlocked===true)
-return data
+const filteredArray = data.producers.filter(producer =>producer.unlocked===true)
+return filteredArray
 }
 
 // You do not need to edit this function
@@ -90,7 +90,7 @@ function deleteAllChildNodes(parent) {
 
 function renderProducers(data) {
   // call the unlockProducers function and pass it data.producers and data.coffee
-getUnlockedProducers(data.producers, data.coffee);
+unlockProducers(data.producers, data.coffee);
   // make a reference to the DOM element whose ID is producer_container
 const producerContainer = document.querySelector("#producer_container");
   // call the deleteAllChildNodes function and pass it the above producerContainer element
@@ -163,22 +163,23 @@ function tick(data) {
   renderProducers(data);
 }
   // coffee property by the data.totalCPS amount
-bigCoffee.addEventListener("click", function(clickEvent){
-  buyButtonClick(Event, data)
-})
-  // call the updateCoffeeView function and pass it the data.coffee property
 
+  // call the updateCoffeeView function and pass it the data.coffee property
+  
   // call the renderProducers function and pass it the newly updated data object
-  renderProducers(data);
-}
+
 
 // Event Listeners
 
 // add a 'click' event listener to the bigCoffee element (that you referenced above)
 // the event listener should call the clickCoffee function, and pass in the global data object
-
+bigCoffee.addEventListener("click", function(clickEvent){
+  clickCoffee(data)
+});
 // add a 'click' event listener to the element (referenced at the top of the file)
 // the event listener should call the buyButtonClick function and pass it the event, and the global data object
-
+producerContainer.addEventListener("click", function (clickEvent) {
+  buyButtonClick(clickEvent, data)
+})
 // You do not need to edit this last line. This simple runs your tick function every 1000ms, or 1s
 setInterval(() => tick(data), 1000);
